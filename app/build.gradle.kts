@@ -11,6 +11,12 @@ android {
     namespace = "com.example.ksptest"
     compileSdk = 33
 
+    buildFeatures {
+        buildConfig = true
+        compose = true
+        dataBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.ksptest"
         minSdk = 24
@@ -21,6 +27,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"" + getUnsplashAccess() + "\"")
     }
 
     buildTypes {
@@ -36,10 +44,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    buildFeatures {
-        compose = true
-        dataBinding = true
-    }
+
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
@@ -97,5 +102,8 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
 
+fun getUnsplashAccess(): String? {
+    return project.findProperty("unsplash_access_key") as? String
 }
