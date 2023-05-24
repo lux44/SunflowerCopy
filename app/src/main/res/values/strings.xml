@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KspTest</string>
+    <string name="my_garden_title">My Garden</string>
+    <string name="plant_list_title">Plant List</string>
 </resources>
