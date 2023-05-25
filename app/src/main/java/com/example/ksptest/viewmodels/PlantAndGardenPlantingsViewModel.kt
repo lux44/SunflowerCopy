@@ -4,7 +4,7 @@ import com.example.ksptest.data.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PlantAndGardenPlantingViewModel ( plantings: PlantAndGardenPlantings) {
+class PlantAndGardenPlantingsViewModel (plantings: PlantAndGardenPlantings) {
 
     private val plant = checkNotNull(plantings.plant)
     private val gardenPlanting = plantings.gardenPlantings[0]
@@ -18,6 +18,10 @@ class PlantAndGardenPlantingViewModel ( plantings: PlantAndGardenPlantings) {
         get() = plant.imageUrl
 
     val plantDateString : String = dateFormat.format(gardenPlanting.plantDate.time)
+
+
+    val plantName
+        get() = plant.name
 
     val plantId
         get() = plant.plantId

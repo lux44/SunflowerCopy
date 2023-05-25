@@ -41,6 +41,14 @@ class PlantListViewModel @Inject constructor(
         }
     }
 
+    fun updateData() {
+        if (isFiltered()) {
+            clearGrowZoneNumber()
+        } else {
+            setGrowZoneNumber(9)
+        }
+    }
+
     fun setGrowZoneNumber(num:Int) {
         growZone.value = num
     }

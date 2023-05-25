@@ -2,4 +2,10 @@
     <string name="app_name">KspTest</string>
     <string name="my_garden_title">My Garden</string>
     <string name="plant_list_title">Plant List</string>
+    <string name="add_plant">Add plant</string>
+    <string name="watered_date_header">Last Watered</string>
+    <plurals name="watering_next">
+        <item quantity="one">water tomorrow.</item>
+        <item quantity="other">water in %d days.</item>
+    </plurals>
 </resources>
