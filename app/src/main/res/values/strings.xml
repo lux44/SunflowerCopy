@@ -8,4 +8,5 @@
         <item quantity="one">water tomorrow.</item>
         <item quantity="other">water in %d days.</item>
     </plurals>
+    <string name="a11y_plant_item_image">Picture of plant</string>
 </resources>

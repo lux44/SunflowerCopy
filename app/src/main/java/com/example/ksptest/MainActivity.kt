@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
+import androidx.core.view.WindowCompat
 import com.example.ksptest.compose.SunflowerApp
 import com.example.ksptest.compose.home.SunFlowerPage
 import com.example.ksptest.viewmodels.PlantListViewModel
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        
         setContent {
             MdcTheme {
                 setContent {

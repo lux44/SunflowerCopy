@@ -14,16 +14,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PlantListViewModel @Inject constructor(
+class PlantListViewModel @Inject internal constructor(
     plantRepository: PlantRepository,
     private val savedStateHandle: SavedStateHandle
-) : ViewModel(){
+) : ViewModel() {
 
     private val growZone : MutableStateFlow<Int> = MutableStateFlow(
         savedStateHandle[GROW_ZONE_SAVED_STATE_KEY] ?: NO_GROW_ZONE
     )
 
-    val plants: LiveData<List<Plant>> = growZone.flatMapLatest {zone->
+    val plants: LiveData<List<Plant>> = growZone.flatMapLatest { zone->
         if (zone == NO_GROW_ZONE) {
             plantRepository.getPlants()
         }else {
@@ -33,10 +33,8 @@ class PlantListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            if (isFiltered()) {
-                clearGrowZoneNumber()
-            }else {
-                setGrowZoneNumber(9)
+            growZone.collect {  newGrowZone ->
+                savedStateHandle[GROW_ZONE_SAVED_STATE_KEY] = newGrowZone
             }
         }
     }
