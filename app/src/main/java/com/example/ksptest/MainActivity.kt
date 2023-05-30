@@ -44,19 +44,17 @@ class MainActivity : AppCompatActivity() {
         
         setContent {
             MdcTheme {
-                setContent {
-                    SunflowerApp(
-                        onAttached = {toolbar ->
-                            setSupportActionBar(toolbar)
-                        },
-                        onPageChange = {page->
-                            when(page) {
-                                SunFlowerPage.MY_GARDEN -> removeMenuProvider(menuProvider)
-                                SunFlowerPage.PLANT_LIST -> addMenuProvider(menuProvider, this)
-                            }
+                SunflowerApp(
+                    onAttached = {toolbar ->
+                        setSupportActionBar(toolbar)
+                    },
+                    onPageChange = {page->
+                        when(page) {
+                            SunFlowerPage.MY_GARDEN -> removeMenuProvider(menuProvider)
+                            SunFlowerPage.PLANT_LIST -> addMenuProvider(menuProvider, this)
                         }
-                    )
-                }
+                    }
+                )
             }
         }
     }

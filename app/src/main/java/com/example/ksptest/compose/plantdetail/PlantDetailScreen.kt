@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.FloatingActionButton
@@ -105,17 +106,22 @@ fun PlantDetailScreen(
 
     if (plant != null && isPlanted != null && showSnackBar != null) {
         Surface {
-            TextSnackBarContainer(snackBarText = stringResource(id = R.string.added_plant_to_garden),
+            TextSnackBarContainer(
+                snackBarText = stringResource(id = R.string.added_plant_to_garden),
                 showSnackBar = showSnackBar,
-                onDismissSnackBar = { plantDetailViewModel.dismissSnackBar() }) {
+                onDismissSnackBar = { plantDetailViewModel.dismissSnackBar() }
+            ) {
                 PlantDetails(
                     plant = plant,
                     isPlanted = isPlanted,
                     hasValidUnsplashKey = plantDetailViewModel.hasValidUnsplashKey(),
                     callbacks = PlantDetailsCallbacks(
-                        onBackClick = onBackClick, onFabClick = {
+                        onBackClick = onBackClick,
+                        onFabClick = {
                             plantDetailViewModel.addPlantToGarden()
-                        }, onShareClick = onShareClick, onGalleryClick = onGalleryClick
+                        },
+                        onShareClick = onShareClick,
+                        onGalleryClick = onGalleryClick
                     )
                 )
             }
@@ -135,7 +141,7 @@ fun PlantDetails(
 ) {
     val scrollState = rememberScrollState()
     var plantScroller by remember {
-        mutableStateOf(PlantDetailScroller(scrollState, Float.MAX_VALUE))
+        mutableStateOf(PlantDetailScroller(scrollState, Float.MIN_VALUE))
     }
     val transitionState = remember(plantScroller) {
         plantScroller.toolbarTransitionState
@@ -146,8 +152,9 @@ fun PlantDetails(
     val toolbarAlpha = transition.animateFloat(
         transitionSpec = { spring(stiffness = Spring.StiffnessLow) }, label = ""
     ) {toolbarTransitionState->
-        if (toolbarTransitionState == ToolbarState.HIDDEN) 1f else 0f
+        if (toolbarTransitionState == ToolbarState.HIDDEN) 0f else 1f
     }
+
     val contentAlpha = transition.animateFloat(
         transitionSpec = { spring(stiffness = Spring.StiffnessLow) }, label = ""
     ) {toolbarTransitionState->
@@ -324,11 +331,17 @@ private fun PlantFab(
     val addPlantContentDescription = stringResource(id = R.string.add_plant)
     FloatingActionButton(
         onClick = onFabClick,
-        shape = MaterialTheme.shapes.small,
-        modifier = modifier.semantics { contentDescription = addPlantContentDescription }
+        shape = MaterialTheme.shapes.small.copy(
+            topStart = CornerSize(0.dp),
+            topEnd = CornerSize(30.dp),
+            bottomEnd = CornerSize(0.dp),
+            bottomStart = CornerSize(30.dp)
+        ),
+        modifier = modifier.semantics { contentDescription = addPlantContentDescription },
+        //backgroundColor = colorResource(id = R.color.sunflower_yellow_500)
     ) {
         Icon(
-            imageVector = Icons.Filled.Add,
+            Icons.Filled.Add,
             contentDescription = null
         )
     }
@@ -424,7 +437,7 @@ private fun PlantHeaderActions(
 
         IconButton(
             onClick = onBackClick, modifier = Modifier
-                .padding(32.dp)
+                .padding(12.dp)
                 .then(iconModifier)
         ) {
             Icon(
@@ -435,7 +448,7 @@ private fun PlantHeaderActions(
         val shareContentDescription = stringResource(id = R.string.menu_item_share_plant)
         IconButton(onClick = onShareClick,
             modifier = Modifier
-                .padding(32.dp)
+                .padding(12.dp)
                 .then(iconModifier)
                 .semantics { contentDescription = shareContentDescription }) {
             Icon(
@@ -525,8 +538,6 @@ private fun PlantDetailContentPreview() {
                 hasValidUnsplashKey = true,
                 callbacks = PlantDetailsCallbacks({ }, { }, { }, { })
             )
-
-            PlantFab(onFabClick = { /*TODO*/ })
         }
 
 

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
@@ -114,7 +115,9 @@ fun HomePagerScreen(
                         )
                     },
                     unselectedContentColor = colorResource(id = R.color.sunflower_green_700),
+                    //unselectedContentColor = MaterialTheme.colors.primaryVariant,
                     selectedContentColor = colorResource(id = R.color.sunflower_yellow_500),
+                    //selectedContentColor = MaterialTheme.colors.secondary,
                 )
             }
         }

@@ -160,7 +160,7 @@ fun GardenListItem(
    val marginNormal = 16.dp
 
     Card(
-        onClick = { onPlantClick },
+        onClick = { onPlantClick(plant) },
         modifier = Modifier.padding(
             start = cardSideMargin,
             end = cardSideMargin,
