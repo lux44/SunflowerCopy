@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.ksptest.R
+import com.example.ksptest.compose.gallery.GalleryScreen
 import com.example.ksptest.compose.home.HomeScreen
 import com.example.ksptest.compose.home.SunFlowerPage
 import com.example.ksptest.compose.plantdetail.PlantDetailScreen
@@ -59,8 +60,20 @@ fun SUnFlowerNavHost(
                     createShareIntent(activity, it)
                 },
                 onGalleryClick = {
-                    //navController.navigate("gallery/${it.name}")
+                    navController.navigate("gallery/${it.name}")
                 }
+            )
+        }
+
+        composable(
+            "gallery/{plantName}",
+            arguments = listOf(navArgument("plantName"){
+                type = NavType.StringType
+            })
+        ) {
+            GalleryScreen(
+                onPhotoClick ={},
+                onUpClick = {}
             )
         }
     }
