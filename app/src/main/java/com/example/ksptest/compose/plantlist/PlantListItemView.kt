@@ -16,15 +16,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.example.ksptest.R
 import com.example.ksptest.compose.card
 import com.example.ksptest.compose.util.SunflowerImage
 import com.example.ksptest.data.Plant
 import com.example.ksptest.data.UnsplashPhoto
-import com.google.accompanist.themeadapter.material.MdcTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -67,5 +64,13 @@ fun PlantListItem(plant: Plant, onClick: () -> Unit) {
 @Composable
 fun PhotoListItem(photo:UnsplashPhoto, onClick: () -> Unit) {
     ImageListItem(name = photo.user.name, imageUrl = photo.urls.small, onClick = onClick)
+}
+
+@Composable
+@Preview
+fun ItemViewPreview() {
+    ImageListItem(name = "Apple", imageUrl = "") {
+
+    }
 }
 
