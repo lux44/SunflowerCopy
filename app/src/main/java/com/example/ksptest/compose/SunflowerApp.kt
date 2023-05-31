@@ -2,6 +2,7 @@ package com.example.ksptest.compose
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -72,8 +73,14 @@ fun SUnFlowerNavHost(
             })
         ) {
             GalleryScreen(
-                onPhotoClick ={},
-                onUpClick = {}
+                onPhotoClick ={
+                    val uri = Uri.parse(it.user.attributionUrl)
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    activity.startActivity(intent)
+                },
+                onUpClick = {
+                    navController.navigateUp()
+                }
             )
         }
     }

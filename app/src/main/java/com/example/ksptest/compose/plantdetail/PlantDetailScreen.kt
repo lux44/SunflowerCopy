@@ -508,7 +508,7 @@ private fun PlantInformation(
                 Image(painter = painterResource(id = R.drawable.ic_photo_library),
                     contentDescription = "Gallery Icon",
                     Modifier
-                        .clickable { onGalleryClick }
+                        .clickable { onGalleryClick() }
                         .align(Alignment.CenterEnd))
             }
         }
