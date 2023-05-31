@@ -146,9 +146,7 @@ private fun GardenList(
     }
 }
 
-@OptIn(
-    ExperimentalMaterialApi::class
-)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun GardenListItem(
     plant: PlantAndGardenPlantings,
@@ -242,6 +240,16 @@ private fun GardenScreenPreview(
     }
 }
 
+@Preview
+@Composable
+private fun GardenScreenItemPreview(
+    @PreviewParameter(GardenScreenPreviewParamProvider::class) gardenPlants: List<PlantAndGardenPlantings>
+) {
+    MdcTheme {
+        GardenScreen(gardenPlants = gardenPlants)
+    }
+}
+
 private class GardenScreenPreviewParamProvider :
         PreviewParameterProvider<List<PlantAndGardenPlantings>> {
     override val values: Sequence<List<PlantAndGardenPlantings>>
@@ -269,4 +277,28 @@ private class GardenScreenPreviewParamProvider :
         )
 
 }
+
+//@Preview
+//@Composable
+//private fun GardenScreenItemViewPreview(
+//    @PreviewParameter(GardenScreenItemPreviewParamProvider::class) plant:Plant
+//) {
+//    MdcTheme {
+//        GardenListItem(plant = plant, onPlantClick = {})
+//    }
+//}
+//
+//private class GardenScreenItemPreviewParamProvider: PreviewParameterProvider<Plant> {
+//    override val values: Sequence<Plant>
+//        get() = sequence {
+//            Plant(
+//                plantId = "1",
+//                name = "Apple",
+//                description = "An Apple",
+//                growZoneNumber = 1,
+//                wateringInterval = 2,
+//                imageUrl = "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max"
+//            )
+//        }
+//}
 
